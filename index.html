@@ -139,13 +139,15 @@
           <h3>Mika IoT — Voice Assistant Satellite</h3>
           <p>
             A physical, Alexa-style voice assistant built on an ESP32 — Mika moved
-            off the screen. The backend already streams answers from Gemini and
-            remembers the conversation; speech and the device connection are next.
+            off the screen. The backend already takes typed or spoken questions,
+            transcribes speech locally with Whisper, streams answers from Gemini and
+            remembers the conversation. Spoken replies and the device connection are next.
           </p>
           <p class="role"><span class="mono">My role:</span> backend — the Python service the device talks to (connectivity, LLM API, memory)</p>
           <div class="chips">
-            <span>ESP32</span><span>Python</span><span>Gemini API</span><span>pytest</span>
+            <span>ESP32</span><span>Python</span><span>Gemini API</span><span>faster-whisper</span><span>pytest</span><span>Ruff</span>
           </div>
+          <a href="https://github.com/FJGB22/mika-voice-assistant" class="link" target="_blank" rel="noopener">github.com/FJGB22/mika-voice-assistant ↗</a>
         </article>
 
         <!-- TODO: next project goes here -->
