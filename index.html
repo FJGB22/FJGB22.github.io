@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jonathan Kuniardi — Portfolio</title>
+  <meta name="description" content="Jonathan Kuniardi — Computer Science student (Intelligent Systems) at BINUS University. Building real-time conversational AI and voice systems.">
+
+  <!-- Social preview (WhatsApp, LinkedIn, Discord) -->
+  <meta property="og:title" content="Jonathan Kuniardi — Portfolio">
+  <meta property="og:description" content="CS student building real-time conversational AI and voice systems.">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Apply saved theme before paint so the page doesn't flash -->
+  <script>
+    try {
+      var t = localStorage.getItem('theme');
+      if (t) document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {}
+  </script>
+</head>
+<body>
+
+  <!-- ============ NAVIGATION ============ -->
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#top" class="logo">jk<span class="accent">.</span></a>
+      <nav class="nav-links">
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
+        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">◐</button>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+
+    <!-- ============ HERO ============ -->
+    <section class="hero container">
+      <p class="eyebrow">Computer Science · Intelligent Systems · BINUS University</p>
+      <h1>Hi, I'm Jonathan.<br>I build AI that <span class="accent">talks back.</span></h1>
+      <p class="lead">
+        I'm a CS student focused on real-time conversational AI — voice pipelines,
+        LLM-powered characters, and the small engineering decisions that make them feel alive.
+        Currently building <strong>Mika</strong>, an AI VTuber, from the ground up.
+      </p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-primary">See my work</a>
+        <a href="https://github.com/FJGB22" class="btn btn-ghost" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/jonathankuniardi/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="cv.pdf" class="btn btn-ghost" target="_blank">Download CV</a>
+      </div>
+    </section>
+
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="section container">
+      <h2 class="section-title"><span class="mono">01</span> Projects</h2>
+
+      <!-- Featured project: Mika AI VTuber -->
+      <article class="featured">
+        <div class="featured-head">
+          <div>
+            <p class="tag">Featured · Solo project · 2026 — ongoing</p>
+            <h3>Mika — AI VTuber</h3>
+            <p class="featured-sub">A real-time, voice-driven AI streamer with her own personality, memory, and sense of timing.</p>
+          </div>
+          <a href="https://github.com/FJGB22/ai-vtuber" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">View repo ↗</a>
+        </div>
+
+        <!-- TODO: DEMO VIDEO — record a 20–30s screen capture of Mika talking,
+             save it as mika-demo.mp4 in this folder, then uncomment this block.
+             muted + autoplay + loop = plays silently like a GIF; controls lets people turn sound on.
+        <video class="demo" src="mika-demo.mp4" autoplay muted loop playsinline controls></video>
+        -->
+
+        <div class="featured-body">
+          <div class="featured-text">
+            <h4>What it does</h4>
+            <p>
+              Mika runs as a simulated livestream: viewer messages come in as chat,
+              and she answers out loud — sarcastic and teasing, not a polite assistant.
+              You can talk to her by voice and she talks back. If chat goes quiet,
+              she starts talking on her own, like a real streamer filling dead air.
+            </p>
+
+            <h4>How it's built</h4>
+            <ul class="bullets">
+              <li><strong>Streaming brain</strong> — LLM tokens are streamed and cut into sentences, so speech can start before the full reply is finished.</li>
+              <li><strong>Interruptible voice</strong> — an audio queue that can be cut off mid-sentence when someone speaks.</li>
+              <li><strong>Ears</strong> — microphone input transcribed locally with Whisper.</li>
+              <li><strong>Director</strong> — handles turn-taking and idle behaviour.</li>
+              <li><strong>Memory</strong> — recalls facts across turns within a session.</li>
+            </ul>
+
+            <h4>What I learned</h4>
+            <p>
+              I built a measurement bench before optimising anything. It showed Mika takes
+              about <strong>4.4 s</strong> before she makes a sound, and that my
+              sentence-streaming trick saved nothing yet: the current Gemini endpoint returns
+              each reply in one piece. The next fix isn't a bigger model. It's the ~3 s before
+              the first sentence exists and the 1–2 s the voice takes to start.
+            </p>
+          </div>
+
+          <!-- Pipeline diagram, built with plain HTML/CSS -->
+          <div class="pipeline" aria-label="Mika architecture pipeline">
+            <div class="stage"><span class="mono">ears.py</span><small>Mic → Whisper</small></div>
+            <div class="arrow">↓</div>
+            <div class="stage"><span class="mono">director.py</span><small>Turn-taking · idle</small></div>
+            <div class="arrow">↓</div>
+            <div class="stage stage-accent"><span class="mono">brain.py</span><small>LLM · sentence chunking</small></div>
+            <div class="arrow">↓</div>
+            <div class="stage"><span class="mono">voice.py</span><small>Interruptible TTS queue</small></div>
+            <div class="stat">
+              <span class="stat-num">6</span><span class="stat-label">decoupled modules</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="chips">
+          <span>Python 3.12</span><span>asyncio</span><span>Gemini API</span>
+          <span>faster-whisper</span><span>edge-tts</span><span>ffmpeg</span>
+        </div>
+      </article>
+
+      <!-- Other projects: copy one .card block to add a new project -->
+      <div class="grid">
+        <article class="card">
+          <p class="tag">Self-initiated → team of 5 · Embedded Systems course · 2026 — ongoing</p>
+          <h3>Mika IoT — Voice Assistant Satellite</h3>
+          <p>
+            A physical, Alexa-style voice assistant built on an ESP32 — Mika moved
+            off the screen. The backend already streams answers from Gemini and
+            remembers the conversation; speech and the device connection are next.
+          </p>
+          <p class="role"><span class="mono">My role:</span> backend — the Python service the device talks to (connectivity, LLM API, memory)</p>
+          <div class="chips">
+            <span>ESP32</span><span>Python</span><span>Gemini API</span><span>pytest</span>
+          </div>
+        </article>
+
+        <!-- TODO: next project goes here -->
+        <article class="card card-empty">
+          <p class="tag">Next</p>
+          <h3>More coming soon</h3>
+          <p>I'm always building something. Check my GitHub for what I'm working on right now.</p>
+          <a href="https://github.com/FJGB22" class="link" target="_blank" rel="noopener">github.com/FJGB22 ↗</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience" class="section container">
+      <h2 class="section-title"><span class="mono">02</span> Experience</h2>
+
+      <div class="timeline">
+        <div class="t-item">
+          <div class="t-date mono">2025 — Present</div>
+          <div class="t-body">
+            <h3>Activist → Regional Secretary, Kemanggisan</h3>
+            <p class="t-org">Binusian Gaming (BG) · BINUS University</p>
+            <p>Joined as an activist in 2025 and was appointed Regional Secretary in 2026. Handle meeting minutes, event proposals, accountability reports, MoA/MoU drafts, and official correspondence for a region of ~30 organisers serving 100+ members per intake.</p>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-date mono">2x · Annual</div>
+          <div class="t-body">
+            <h3>Booth Lead, Freshmen Expo</h3>
+            <p class="t-org">Binusian Gaming (BG) · BINUS University</p>
+            <p>Led the organisation's booth at BINUS's freshmen expo twice — owned the concept and assembled a committee of under 10 people, reaching 150+ visitors per expo.</p>
+          </div>
+        </div>
+
+        <div class="t-item">
+          <div class="t-date mono">Odd Sem 2025/26</div>
+          <div class="t-body">
+            <h3>Peer Mentor</h3>
+            <p class="t-org">BINUS Mentoring Program</p>
+            <p>Mentored junior students across most of their courses, adapting material to what each mentee actually needed instead of a fixed syllabus.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="edu">
+        <div>
+          <p class="tag">Education</p>
+          <h3>B.Sc. Computer Science — Intelligent Systems</h3>
+          <p class="t-org">BINUS University · 2024 — 2028 (expected)</p>
+        </div>
+        <div class="gpa">
+          <span class="stat-num">3.72</span><span class="stat-label">GPA</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKILLS ============ -->
+    <section id="skills" class="section container">
+      <h2 class="section-title"><span class="mono">03</span> Skills</h2>
+
+      <div class="skills">
+        <div class="skill-group">
+          <h3>Languages</h3>
+          <p>Python · HTML · CSS · TypeScript (basics) · Java (basics)</p>
+        </div>
+        <div class="skill-group">
+          <h3>AI &amp; Voice</h3>
+          <p>LLM APIs (Gemini, OpenAI-compatible SDK) · Prompt &amp; persona design · Speech-to-text (Whisper) · Text-to-speech</p>
+        </div>
+        <div class="skill-group">
+          <h3>Hardware</h3>
+          <p>ESP32 · Embedded prototyping</p>
+        </div>
+        <div class="skill-group">
+          <h3>Tools</h3>
+          <p>Git &amp; GitHub · VS Code · Figma · Canva · Video editing</p>
+        </div>
+      </div>
+
+      <p class="note">
+        I use AI as a development tool — and I make a point of understanding every line
+        I ship: why it's there and what breaks without it.
+      </p>
+    </section>
+
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="section container contact">
+      <h2 class="section-title"><span class="mono">04</span> Contact</h2>
+      <p class="lead">Open to internship opportunities. The fastest way to reach me is email.</p>
+      <div class="contact-links">
+        <a href="mailto:kuniardijonathan@gmail.com" class="btn btn-primary">kuniardijonathan@gmail.com</a>
+        <a href="https://github.com/FJGB22" class="btn btn-ghost" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/jonathankuniardi/" class="btn btn-ghost" target="_blank" rel="noopener">LinkedIn ↗</a>
+        <a href="cv.pdf" class="btn btn-ghost" target="_blank">Download CV</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer container">
+    <p>© <span id="year"></span> Jonathan Kuniardi · Jakarta, Indonesia</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

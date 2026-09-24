@@ -1,0 +1,356 @@
+/* ============================================
+   1. DESIGN TOKENS — change colors/fonts here
+   ============================================ */
+:root {
+  --bg: #fafaf8;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b6b6b;
+  --border: #e6e4df;
+  --accent: #4f46e5;
+  --accent-soft: #eef0ff;
+
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  --radius: 12px;
+  --max-width: 960px;
+}
+
+/* Dark mode: follows the system unless the visitor picked light */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #111113;
+    --surface: #18181b;
+    --text: #ededed;
+    --muted: #9a9a9f;
+    --border: #2a2a2e;
+    --accent: #8b87ff;
+    --accent-soft: #1f1e3a;
+  }
+}
+/* Dark mode: forced by the toggle button */
+:root[data-theme="dark"] {
+  --bg: #111113;
+  --surface: #18181b;
+  --text: #ededed;
+  --muted: #9a9a9f;
+  --border: #2a2a2e;
+  --accent: #8b87ff;
+  --accent-soft: #1f1e3a;
+}
+
+/* ============================================
+   2. BASE / RESET
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 { line-height: 1.2; margin: 0 0 0.5em; }
+p { margin: 0 0 1em; }
+a { color: inherit; }
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.mono { font-family: var(--font-mono); }
+.accent { color: var(--accent); }
+
+/* ============================================
+   3. NAVIGATION
+   ============================================ */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: color-mix(in srgb, var(--bg) 85%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 60px;
+}
+.logo {
+  font-family: var(--font-mono);
+  font-weight: 500;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+.nav-links { display: flex; align-items: center; gap: 24px; }
+.nav-links a {
+  text-decoration: none;
+  color: var(--muted);
+  font-size: 0.9rem;
+  transition: color 0.15s;
+}
+.nav-links a:hover { color: var(--text); }
+
+.theme-toggle {
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+/* ============================================
+   4. HERO
+   ============================================ */
+.hero { padding: 96px 16px 72px; }
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--muted);
+  letter-spacing: 0.02em;
+}
+.hero h1 {
+  font-size: clamp(2.2rem, 6vw, 3.6rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+}
+.lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 620px;
+}
+.lead strong { color: var(--text); }
+.hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+
+/* ============================================
+   5. BUTTONS
+   ============================================ */
+.btn {
+  display: inline-block;
+  padding: 11px 20px;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1px solid transparent;
+  transition: transform 0.15s, background 0.15s;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary { background: var(--text); color: var(--bg); }
+.btn-ghost { border-color: var(--border); background: var(--surface); }
+.btn-ghost:hover { border-color: var(--muted); }
+.btn-sm { padding: 7px 14px; font-size: 0.85rem; white-space: nowrap; }
+
+/* ============================================
+   6. SECTIONS
+   ============================================ */
+.section { padding: 72px 16px; border-top: 1px solid var(--border); }
+.section-title {
+  font-size: 1.6rem;
+  letter-spacing: -0.02em;
+  margin-bottom: 40px;
+}
+.section-title .mono {
+  color: var(--accent);
+  font-size: 0.9rem;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+.tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+/* ============================================
+   7. FEATURED PROJECT
+   ============================================ */
+.featured {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 32px;
+  margin-bottom: 24px;
+}
+.featured-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.featured h3 { font-size: 1.6rem; letter-spacing: -0.02em; }
+.featured-sub { color: var(--muted); margin: 0; }
+.featured h4 {
+  font-size: 0.95rem;
+  margin-top: 24px;
+}
+.featured h4:first-child { margin-top: 0; }
+
+/* Demo video: full width of the card, rounded like everything else */
+.demo {
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  margin-bottom: 28px;
+}
+
+.featured-body {
+  display: grid;
+  grid-template-columns: 1fr 240px;
+  gap: 40px;
+}
+
+.bullets { padding-left: 18px; margin: 0 0 1em; }
+.bullets li { margin-bottom: 6px; }
+
+/* Pipeline diagram */
+.pipeline { display: flex; flex-direction: column; align-items: stretch; }
+.stage {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 10px 14px;
+  background: var(--bg);
+  text-align: center;
+}
+.stage .mono { display: block; font-size: 0.85rem; }
+.stage small { color: var(--muted); font-size: 0.75rem; }
+.stage-accent { border-color: var(--accent); background: var(--accent-soft); }
+.arrow { text-align: center; color: var(--muted); line-height: 1.6; }
+
+.stat { margin-top: 24px; text-align: center; }
+.stat-num {
+  display: block;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+.stat-label { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+
+/* Tech chips */
+.chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.chips span {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: var(--accent);
+}
+
+/* ============================================
+   8. PROJECT CARDS
+   ============================================ */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+}
+.card h3 { font-size: 1.2rem; }
+.card p { color: var(--muted); }
+.card .role { color: var(--text); font-size: 0.9rem; }
+.card-empty { border-style: dashed; background: transparent; }
+.link { color: var(--accent); font-family: var(--font-mono); font-size: 0.85rem; }
+
+/* ============================================
+   9. EXPERIENCE TIMELINE
+   ============================================ */
+.timeline { display: flex; flex-direction: column; gap: 32px; }
+.t-item {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 24px;
+}
+.t-date { font-size: 0.8rem; color: var(--muted); padding-top: 4px; }
+.t-body h3 { font-size: 1.1rem; margin-bottom: 4px; }
+.t-org { color: var(--accent); font-size: 0.9rem; margin-bottom: 8px; }
+.t-body p:last-child { color: var(--muted); }
+
+.edu {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-top: 48px;
+  padding: 28px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+.edu h3 { font-size: 1.1rem; }
+.edu .t-org { margin: 0; }
+.gpa { text-align: center; }
+
+/* ============================================
+   10. SKILLS
+   ============================================ */
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 24px;
+}
+.skill-group h3 {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.skill-group p { color: var(--muted); font-size: 0.95rem; }
+.note {
+  margin-top: 32px;
+  padding: 16px 20px;
+  border-left: 3px solid var(--accent);
+  background: var(--accent-soft);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.95rem;
+}
+
+/* ============================================
+   11. CONTACT & FOOTER
+   ============================================ */
+.contact-links { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.footer {
+  padding: 32px 16px;
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* ============================================
+   12. RESPONSIVE — phones & small tablets
+   ============================================ */
+@media (max-width: 720px) {
+  .nav-links a { display: none; }          /* keep nav clean on phones */
+  .hero { padding: 64px 16px 48px; }
+  .featured { padding: 22px; }
+  .featured-head { flex-direction: column; }
+  .featured-body { grid-template-columns: 1fr; gap: 24px; }
+  .t-item { grid-template-columns: 1fr; gap: 4px; }
+  .edu { flex-direction: column; align-items: flex-start; }
+}
