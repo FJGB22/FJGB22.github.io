@@ -3,11 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Jonathan Kuniardi — Portfolio</title>
-  <meta name="description" content="Jonathan Kuniardi — Computer Science student (Intelligent Systems) at BINUS University. Building real-time conversational AI and voice systems.">
+  <title>Jonathan Kuniardi | Portfolio</title>
+  <meta name="description" content="Jonathan Kuniardi, Computer Science student (Intelligent Systems) at BINUS University. Building real-time conversational AI and voice systems.">
 
   <!-- Social preview (WhatsApp, LinkedIn, Discord) -->
-  <meta property="og:title" content="Jonathan Kuniardi — Portfolio">
+  <meta property="og:title" content="Jonathan Kuniardi | Portfolio">
   <meta property="og:description" content="CS student building real-time conversational AI and voice systems.">
   <meta property="og:type" content="website">
 
@@ -49,7 +49,7 @@
       <p class="eyebrow">Computer Science · Intelligent Systems · BINUS University</p>
       <h1>Hi, I'm Jonathan.<br>I build AI that <span class="accent">talks back.</span></h1>
       <p class="lead">
-        I'm a CS student focused on real-time conversational AI — voice pipelines,
+        I'm a CS student focused on real-time conversational AI: voice pipelines,
         LLM-powered characters, and the small engineering decisions that make them feel alive.
         Currently building <strong>Mika</strong>, an AI VTuber, from the ground up.
       </p>
@@ -69,14 +69,14 @@
       <article class="featured">
         <div class="featured-head">
           <div>
-            <p class="tag">Featured · Solo project · 2026 — ongoing</p>
-            <h3>Mika — AI VTuber</h3>
+            <p class="tag">Featured · Solo project · 2026 - ongoing</p>
+            <h3>Mika: AI VTuber</h3>
             <p class="featured-sub">A real-time, voice-driven AI streamer with her own personality, memory, and sense of timing.</p>
           </div>
           <a href="https://github.com/FJGB22/ai-vtuber" class="btn btn-ghost btn-sm" target="_blank" rel="noopener">View repo ↗</a>
         </div>
 
-        <!-- TODO: DEMO VIDEO — record a 20–30s screen capture of Mika talking,
+        <!-- TODO: DEMO VIDEO. Record a 20–30s screen capture of Mika talking,
              save it as mika-demo.mp4 in this folder, then uncomment this block.
              muted + autoplay + loop = plays silently like a GIF; controls lets people turn sound on.
         <video class="demo" src="mika-demo.mp4" autoplay muted loop playsinline controls></video>
@@ -87,18 +87,18 @@
             <h4>What it does</h4>
             <p>
               Mika runs as a simulated livestream: viewer messages come in as chat,
-              and she answers out loud — sarcastic and teasing, not a polite assistant.
+              and she answers out loud: sarcastic and teasing, not a polite assistant.
               You can talk to her by voice and she talks back. If chat goes quiet,
               she starts talking on her own, like a real streamer filling dead air.
             </p>
 
             <h4>How it's built</h4>
             <ul class="bullets">
-              <li><strong>Streaming brain</strong> — LLM tokens are streamed and cut into sentences, so speech can start before the full reply is finished.</li>
-              <li><strong>Interruptible voice</strong> — an audio queue that can be cut off mid-sentence when someone speaks.</li>
-              <li><strong>Ears</strong> — microphone input transcribed locally with Whisper.</li>
-              <li><strong>Director</strong> — handles turn-taking and idle behaviour.</li>
-              <li><strong>Memory</strong> — recalls facts across turns within a session.</li>
+              <li><strong>Streaming brain:</strong> LLM tokens are streamed and cut into sentences, so speech can start before the full reply is finished.</li>
+              <li><strong>Interruptible voice:</strong> an audio queue that can be cut off mid-sentence when someone speaks.</li>
+              <li><strong>Ears:</strong> microphone input transcribed locally with Whisper.</li>
+              <li><strong>Director:</strong> handles turn-taking and idle behaviour.</li>
+              <li><strong>Memory:</strong> recalls facts across turns within a session.</li>
             </ul>
 
             <h4>What I learned</h4>
@@ -108,6 +108,11 @@
               sentence-streaming trick saved nothing yet: the current Gemini endpoint returns
               each reply in one piece. The next fix isn't a bigger model. It's the ~3 s before
               the first sentence exists and the 1–2 s the voice takes to start.
+            </p>
+            <p>
+              The same bench tests her persona: 5 out of 5 classic prompt-injection attacks
+              were deflected in character, and her persona rules held in 27 of 27 turns
+              across three runs.
             </p>
           </div>
 
@@ -135,28 +140,28 @@
       <!-- Other projects: copy one .card block to add a new project -->
       <div class="grid">
         <article class="card">
-          <p class="tag">Self-initiated → team of 5 · Embedded Systems course · 2026 — ongoing</p>
-          <h3>Mika IoT — Voice Assistant Satellite</h3>
+          <p class="tag">Self-initiated → team of 5 · Embedded Systems course · 2026 - ongoing</p>
+          <h3>Mika IoT: Voice Assistant Satellite</h3>
           <p>
-            A physical, Alexa-style voice assistant built on an ESP32 — Mika moved
-            off the screen. The backend already takes typed or spoken questions,
-            transcribes speech locally with Whisper, streams answers from Gemini and
-            remembers the conversation. Spoken replies and the device connection are next.
+            An Alexa-style voice assistant: Mika moved off the screen and into a small
+            ESP32-S3 device. The device streams 20 ms audio frames over WebSocket; the
+            server detects when you stop talking, transcribes locally with Whisper, asks
+            Gemini, and sends the answer back. It announces itself as
+            <span class="mono">mika.local</span> over mDNS, so the device finds it on any
+            Wi-Fi without being reflashed. Spoken replies are next.
           </p>
-          <p class="role"><span class="mono">My role:</span> backend — the Python service the device talks to (connectivity, LLM API, memory)</p>
+          <p>
+            Protocol rules live apart from the network code, so the transport can change
+            without touching them, and 80+ tests run without a microphone, network or API key.
+          </p>
+          <p class="role"><span class="mono">My role:</span> the backend, the Python server the device talks to. A teammate builds the ESP32 firmware.</p>
           <div class="chips">
-            <span>ESP32</span><span>Python</span><span>Gemini API</span><span>faster-whisper</span><span>pytest</span><span>Ruff</span>
+            <span>Python</span><span>asyncio</span><span>WebSocket</span><span>mDNS</span><span>faster-whisper</span><span>Gemini API</span><span>pytest</span>
           </div>
           <a href="https://github.com/FJGB22/mika-voice-assistant" class="link" target="_blank" rel="noopener">github.com/FJGB22/mika-voice-assistant ↗</a>
         </article>
 
-        <!-- TODO: next project goes here -->
-        <article class="card card-empty">
-          <p class="tag">Next</p>
-          <h3>More coming soon</h3>
-          <p>I'm always building something. Check my GitHub for what I'm working on right now.</p>
-          <a href="https://github.com/FJGB22" class="link" target="_blank" rel="noopener">github.com/FJGB22 ↗</a>
-        </article>
+        <!-- Next project: copy the .card block above -->
       </div>
     </section>
 
@@ -166,11 +171,11 @@
 
       <div class="timeline">
         <div class="t-item">
-          <div class="t-date mono">2025 — Present</div>
+          <div class="t-date mono">2024 - Present</div>
           <div class="t-body">
             <h3>Activist → Regional Secretary, Kemanggisan</h3>
             <p class="t-org">Binusian Gaming (BG) · BINUS University</p>
-            <p>Joined as an activist in 2025 and was appointed Regional Secretary in 2026. Handle meeting minutes, event proposals, accountability reports, MoA/MoU drafts, and official correspondence for a region of ~30 organisers serving 100+ members per intake.</p>
+            <p>Joined as an activist in November 2024, took on the secretary work in late 2025, and was formally appointed Regional Secretary in January 2026. Handle meeting minutes, event proposals, accountability reports, MoA/MoU drafts, and official correspondence for a region of ~30 organisers serving 100+ members per intake.</p>
           </div>
         </div>
 
@@ -179,7 +184,7 @@
           <div class="t-body">
             <h3>Booth Lead, Freshmen Expo</h3>
             <p class="t-org">Binusian Gaming (BG) · BINUS University</p>
-            <p>Led the organisation's booth at BINUS's freshmen expo twice — owned the concept and assembled a committee of under 10 people, reaching 150+ visitors per expo.</p>
+            <p>Led the organisation's booth at BINUS's freshmen expo twice. Owned the concept and assembled a committee of under 10 people, reaching 150+ visitors per expo.</p>
           </div>
         </div>
 
@@ -197,8 +202,8 @@
       <div class="edu">
         <div>
           <p class="tag">Education</p>
-          <h3>B.Sc. Computer Science — Intelligent Systems</h3>
-          <p class="t-org">BINUS University · 2024 — 2028 (expected)</p>
+          <h3>B.Sc. Computer Science, Intelligent Systems</h3>
+          <p class="t-org">BINUS University · 2024 - 2028 (expected)</p>
         </div>
         <div class="gpa">
           <span class="stat-num">3.72</span><span class="stat-label">GPA</span>
@@ -220,17 +225,17 @@
           <p>LLM APIs (Gemini, OpenAI-compatible SDK) · Prompt &amp; persona design · Speech-to-text (Whisper) · Text-to-speech</p>
         </div>
         <div class="skill-group">
-          <h3>Hardware</h3>
-          <p>ESP32 · Embedded prototyping</p>
+          <h3>Backend</h3>
+          <p>asyncio · WebSocket servers · JSON protocol design · mDNS discovery</p>
         </div>
         <div class="skill-group">
           <h3>Tools</h3>
-          <p>Git &amp; GitHub · VS Code · Figma · Canva · Video editing</p>
+          <p>Git &amp; GitHub · pytest · Ruff · pre-commit hooks · VS Code · Figma · Canva</p>
         </div>
       </div>
 
       <p class="note">
-        I use AI as a development tool — and I make a point of understanding every line
+        I use AI as a development tool, and I make a point of understanding every line
         I ship: why it's there and what breaks without it.
       </p>
     </section>
